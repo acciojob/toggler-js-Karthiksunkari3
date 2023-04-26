@@ -1,16 +1,93 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+	<title>Project Requirement Toggler</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+		}
+		h2 {
+			text-align: center;
+			margin-top: 50px;
+		}
+		.toggle-container {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+		.toggle-container .toggle {
+			position: relative;
+			width: 80px;
+			height: 30px;
+			background-color:#D0D0D0 ;
+			border-radius: 15px;
+			cursor: pointer;
+			gap:10px;
+			transition: background-color 0.3s ease;
+		}
+		.toggle-container .toggle:before {
+			content: '';
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			width: 26px;
+			height: 26px;
+			background-color: white;
+			border-radius: 50%;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+			transition: left 0.3s ease;
+		}
+		.toggle-container .toggle.on:before {
+			left: 52px;
+		}
+		.toggle-container .toggle span {
+			position: absolute;
+			top: 7px;
+			left: 10px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+	</style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+	<h2>How do you want your project to be?</h2>
+	<div class="toggle-container">
+		<div class="g1">
+			<div class="toggle" id="good-toggle">
+				<span>Good</span>
+			</div>
+		</div>
+		<div class="g2">
+			<div class="toggle" id="cheap-toggle">
+				<span>Cheap</span>
+			</div>
+		</div>
+		<div class="g3">
+			<div class="toggle" id="fast-toggle">
+				<span>Fast</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		const toggles = document.querySelectorAll('.toggle');
+		let onToggle = null;
 
+		function toggleHandler(event) {
+			const toggle = event.currentTarget;
+			if (!toggle.classList.contains('on') && onToggle !== null) {
+				onToggle.classList.remove('on');
+			    onToggle.backgroundcolor("purple");
+			}
+			toggle.classList.toggle('on');
+			onToggle = toggle.classList.contains('on') ? toggle : null;
+		}
+
+		toggles.forEach(toggle => {
+			toggle.addEventListener('click', toggleHandler);
+		});
+	</script>
 </body>
-
 </html>
